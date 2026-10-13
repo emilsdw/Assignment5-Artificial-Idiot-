@@ -17,6 +17,19 @@ need:
     - "generator": current word and iterates (w = w[1...k] + c //new "current" word)
 
 
+
+
+- Reader class:
+    - one reader function that takes in the file and returns a string 
+    - map  in map
+        -first map is for every k-gram. The input is the k-gram and the output is another map
+            -second map is for each k-gram, here the input is the letter and the output is the weight for that letter.
+
+
+
+
+
+std::substr = creates a new string that is a copy of a section of the original string
 */
 
 

@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+#include <map>
 
 using namespace std;
 
@@ -10,10 +12,9 @@ using namespace std;
 
 
 class Reader{
-    private:
-    ifstream file();
     public:
     
     string read(const string& filename);
+    map<string, map<char, int>> weights_counter(int k);
 
 };

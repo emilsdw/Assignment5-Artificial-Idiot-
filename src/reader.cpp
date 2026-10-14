@@ -6,7 +6,9 @@
 
 
 
-string Reader::read(const string& filename){
+string 
+Reader::read(const string& filename)
+    {
     ifstream file(filename);
     
     if (!file.is_open()){
@@ -18,35 +20,34 @@ string Reader::read(const string& filename){
 
 
     while(getline(file,line)){
-        text += line;               
+        text += line;
+        text += '\n';            
     }
 
     return text;
 }
 
 
-map<string, map<char, float>> Reader::weight_counter(int k){        
-
-    //Need one loop that goes through every letter in the text and one that goes through every k gram, 
-
-
-    string text;
-    map<string, map<char, float>> weights;
-    int kmax;
-
-    for(int i = 2; i < kmax; i++){
-        for (int j = 0; i < static_cast<int>(text.size()); i++){
-
-            //formula for calculating weight
-
-            
-
-        }
-
+map<string, map<char, float>> 
+Reader::next_char_counter(const string& text, int k)
+    {
+        
+    //Error handling:    
+    if (k <= 0) {
+        throw invalid_argument ("K must be positve");
     }
-}
+    if (text.size() <= static_cast<size_t>(k)){                     //size_t is a unsigned integer type, here its used because the size of a string cant be negative. 
+        throw invalid_argument ("Training text is to short");
+    }
 
-/*
-Need to implement for to calculate weights and put them into the map for each char for each k-gram.
-Might be smart to split it into two functions, one for calcualting one for putting into map. (Doent sound smart now that I think about it)
-*/
+
+    map<string, map<char, float>> counts;
+
+    for(size_t i = 0; i < text.size() - k; i++){
+        string word = text.substr(i,k);                            //creates a new string, substr(pos, length).
+        char next = text[i + k]; 
+
+        counts[word][next] ++;                                    //first key is word, second key is the char, then ++ increases that value by 1. So it counts how many times a specific word is followed by a specific char !!!
+    }
+    return counts;
+}

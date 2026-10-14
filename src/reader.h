@@ -15,6 +15,9 @@ class Reader{
     public:
     
     string read(const string& filename);
-    map<string, map<char, int>> weights_counter(int k);
+    map<string, map<char, float>> weight_counter(int k);
 
+
+
+    
 };

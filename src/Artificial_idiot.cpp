@@ -42,5 +42,17 @@ int main(int argc, char* argv[]){
 
 
 
+
+
+    string text;
+
+    set<char> alphabet;
+    for (char c : text){
+        alphabet.insert(c);
+    }
+
+    int alphabet_size = alphabet.size();
+
+
     return 0;
 }

@@ -28,7 +28,7 @@ Reader::read(const string& filename)
 }
 
 
-map<string, map<char, float>> 
+map<string, map<char, int>> 
 Reader::next_char_counter(const string& text, int k)
     {
         
@@ -41,7 +41,7 @@ Reader::next_char_counter(const string& text, int k)
     }
 
 
-    map<string, map<char, float>> counts;
+    map<string, map<char, int>> counts;
 
     for(size_t i = 0; i < text.size() - k; i++){
         string word = text.substr(i,k);                            //creates a new string, substr(pos, length).
@@ -51,3 +51,28 @@ Reader::next_char_counter(const string& text, int k)
     }
     return counts;
 }
+
+float Reader::prob(
+        const map<string, map<char, int>>& counts,
+        const string& w, 
+        char c, 
+        float alpha,
+        int alphabet_size){
+
+
+            int nwc = counts.at(w).at(c);
+            int nw = 0;
+            set<char> alphabet;
+
+
+            for (const auto& element : counts.at(w)){
+                nw += element.second;
+            }
+
+
+            float prob = (nwc + alpha) / (nw + alpha * alphabet_size);
+
+            return prob;
+        }
+
+

@@ -27,7 +27,23 @@ string Reader::read(const string& filename){
 
 map<string, map<char, float>> Reader::weight_counter(int k){        
 
-    
+    //Need one loop that goes through every letter in the text and one that goes through every k gram, 
+
+
+    string text;
+    map<string, map<char, float>> weights;
+    int kmax;
+
+    for(int i = 2; i < kmax; i++){
+        for (int j = 0; i < static_cast<int>(text.size()); i++){
+
+            //formula for calculating weight
+
+            
+
+        }
+
+    }
 }
 
 /*

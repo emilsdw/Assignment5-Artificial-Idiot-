@@ -15,6 +15,6 @@ using namespace std;
 class Reader{
     public:
 
-    string text;
     string read(const string& filename);
+    set<char> alphabet(const string& text);
 };

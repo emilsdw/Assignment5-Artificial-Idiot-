@@ -1,4 +1,5 @@
 #include "reader.h"
+#include "generator.h"
 
 using namespace std;
 
@@ -37,22 +38,22 @@ std::substr = creates a new string that is a copy of a section of the original s
 
 int main(int argc, char* argv[]){
 
+    Reader reader;
+    Generator generator;
 
+    float alpha = 0.1;
+    int number_of_new_characters = 100;
+    string text = reader.read("training.txt");
 
+    set<char> reader.alphabet(text);
+    int k_gram_size = 2;
+    
 
-
-
-
-
-    string text;
-
-    set<char> alphabet;
-    for (char c : text){
-        alphabet.insert(c);
-    }
-
-    int alphabet_size = alphabet.size();
-
+    string generated = generator.generate_new_word(text, 
+        k_gram_size, 
+        alpha, 
+        number_of_new_characters, 
+        alphabet);
 
     return 0;
 }

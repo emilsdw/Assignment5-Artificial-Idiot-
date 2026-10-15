@@ -1,6 +1,12 @@
 #include "generator.h"
 #include "reader.h"
 
+#include <random>
+#include <vector>
+#include <stdexcept>
+
+using namespace std;
+
 
 map<string, map<char, int>> 
 Generator::next_char_counter(const string& text, int k){
@@ -62,28 +68,54 @@ map<char, float> Generator::prob(
         }
 
 
-string Generator::generate_new_word(int k, float alpha){
-
-
-    //w = result.substr(result.size() - k);
-
-    string text = Reader.text
+string 
+Generator::generate_new_word(const string& text, int k, float alpha, int length, set<char> alphabet) {
     
-
-    string seed = text.substr(0,k);
-    string result = string seed;
-    string w = string seed;
-
-
-
-
-
-
-    for(int i = 0; i < number_of_new_characters; i++){
-
+    //Error handling:
+    if (!(alpha > 0)) {
+        throw invalid_argument("Alpha must be positive");
     }
 
+    if (length < 0) {
+        throw invalid_argument("Length cannot be negative");
+    }
 
+ 
+    auto counts = next_char_counter(text, k);
+
+
+   
+    string w = text.substr(0, k);
+    string result = w;
+
+    //random number generator
+    mt19937 engine(random_device{}());
+
+    for (int i = 0; i < length; ++i) {
+        auto probabilities = prob(counts, w, alpha, alphabet);
+
+        vector<char> characters;
+        vector<double> weights;
+
+        for (const auto& entry : probabilities) {
+            characters.push_back(entry.first);
+            weights.push_back(entry.second);
+        }
+
+        //picks one weight randomly based on their probability
+        discrete_distribution<int> choose(
+            weights.begin(), weights.end()
+        );
+
+        char c = characters[choose(engine)];
+
+        result += c;
+
+        // Remove the first character and append the new one.
+        w = w.substr(1) + c;
+    }
+
+    return result;
 }
 
 

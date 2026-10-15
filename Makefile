@@ -1,5 +1,5 @@
-program: Artificial_idiot.cpp reader.cpp generator.cpp reader.h generator.h
-	g++ -Wall -Wextra -std=c++17 Artificial_idiot.cpp reader.cpp generator.cpp -o program
+program: src/Artificial_idiot.cpp src/reader.cpp src/generator.cpp src/reader.h src/generator.h
+	g++ -Wall -Wextra -std=c++17 src/Artificial_idiot.cpp src/reader.cpp src/generator.cpp -o program
 
 .PHONY: clean
 clean:

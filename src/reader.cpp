@@ -16,12 +16,14 @@ Reader::read(const string& filename){
 
 
     while(getline(file,line)){
+        if (!line.empty() && line.back() == '\r') {
+            line.pop_back();
+        }
         result += line;
         result += '\n';            
     }
 
-    text = result;
-    return text;
+    return result;
 }
 
 

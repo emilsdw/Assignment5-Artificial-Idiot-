@@ -12,9 +12,9 @@ using namespace std;
 
 class Generator{
     public:
-        string generate_new_word(int k, float alpha);
+        string generate_new_word(const string& text, int k, float alpha, int length, set<char> alphabet);
 
-        
+
     private: 
         map<string, map<char, int>> next_char_counter(const string& text, int k);            //function to count how often c follow w
 

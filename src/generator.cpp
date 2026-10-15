@@ -1,4 +1,5 @@
 #include "generator.h"
+#include "reader.h"
 
 
 map<string, map<char, int>> 
@@ -61,8 +62,28 @@ map<char, float> Generator::prob(
         }
 
 
-auto Generator::generate_new_word(int k, float alpha){
+string Generator::generate_new_word(int k, float alpha){
+
+
+    //w = result.substr(result.size() - k);
+
+    string text = Reader.text
     
+
+    string seed = text.substr(0,k);
+    string result = string seed;
+    string w = string seed;
+
+
+
+
+
+
+    for(int i = 0; i < number_of_new_characters; i++){
+
+    }
+
+
 }
 
 

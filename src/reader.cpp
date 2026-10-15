@@ -1,14 +1,7 @@
 #include "reader.h"
 
-
-
-
-
-
-
 string 
-Reader::read(const string& filename)
-    {
+Reader::read(const string& filename){
     ifstream file(filename);
     
     if (!file.is_open()){
@@ -29,9 +22,8 @@ Reader::read(const string& filename)
 
 
 map<string, map<char, int>> 
-Reader::next_char_counter(const string& text, int k)
-    {
-        
+Reader::next_char_counter(const string& text, int k){
+    
     //Error handling:    
     if (k <= 0) {
         throw invalid_argument ("K must be positve");
@@ -52,27 +44,40 @@ Reader::next_char_counter(const string& text, int k)
     return counts;
 }
 
-float Reader::prob(
+map<char, float> Reader::prob(
         const map<string, map<char, int>>& counts,
-        const string& w, 
-        char c, 
+        const string& w,  
         float alpha,
         int alphabet_size){
 
 
-            int nwc = counts.at(w).at(c);
+            
+            
+
+            map<char, float> prob;
+            float prob_wc;
+
             int nw = 0;
-            set<char> alphabet;
 
-
-            for (const auto& element : counts.at(w)){
+            for(const auto& element : counts.at(w)){
                 nw += element.second;
             }
 
+          
 
-            float prob = (nwc + alpha) / (nw + alpha * alphabet_size);
+            for(const auto& bokstav : counts.at(w)){  
+                char c = bokstav.first;
+                
+                int nwc = counts.at(w).at(c);
 
-            return prob;
+
+                prob_wc = (nwc + alpha) / (nw + alpha * alphabet_size);
+
+                prob[c] = prob_wc; 
+            }
+
+            return prob; 
+
         }
 
 

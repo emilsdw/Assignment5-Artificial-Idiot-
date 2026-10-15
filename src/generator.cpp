@@ -1,10 +1,6 @@
 #include "generator.h"
 
 
-
-
-
-
 map<string, map<char, int>> 
 Generator::next_char_counter(const string& text, int k){
     
@@ -62,6 +58,11 @@ map<char, float> Generator::prob(
             }
 
             return prob; 
-
         }
+
+
+auto Generator::generate_new_word(int k, float alpha){
+    
+}
+
 

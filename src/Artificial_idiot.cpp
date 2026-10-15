@@ -59,7 +59,9 @@ int main(int argc, char* argv[]){
         number_of_new_characters, 
         alphabet);
 
-    cout << generated << endl;
+    cout << "Training text size: " << text.size() << '\n';
+    cout << "Generated size: " << generated.size() << '\n';
+    cout << "Generated: [" << generated << "]\n";
 
     return 0;
 }

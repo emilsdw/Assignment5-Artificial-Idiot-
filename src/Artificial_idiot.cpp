@@ -41,13 +41,17 @@ int main(int argc, char* argv[]){
     Reader reader;
     Generator generator;
 
-    float alpha = 0.1;
-    int number_of_new_characters = 100;
-    string text = reader.read("training.txt");
 
-    set<char> reader.alphabet(text);
-    int k_gram_size = 2;
+
+
+    float alpha = 0.1;
+    int number_of_new_characters = stoi(argv[3]);
+    string text = reader.read(argv[2]);
+
+    set<char> alphabet = reader.alphabet(text);
+    int k_gram_size = stoi(argv[1]);
     
+
 
     string generated = generator.generate_new_word(text, 
         k_gram_size, 

@@ -38,14 +38,15 @@ map<char, float> Generator::prob(
         const set<char>& alphabet){
 
 
-            int alphabet_size = alphabet.size();
+            
 
 
             int nw = 0;
-            for(const auto& element : counts.at(w)){
-                nw += element.second;
+            if(counts.count(w) > 0){
+                for(const auto& element : counts.at(w)){
+                    nw += element.second;
+                }
             }
-
             map<char, float> prob;
             float prob_wc;
 
@@ -53,13 +54,17 @@ map<char, float> Generator::prob(
                 char c = bokstav;
                 
                 int nwc = 0;
-                const auto& following = counts.at(w);
-                if(following.count(c) > 0){
-                    nwc = following.at(c);
+                if(counts.count(w) > 0 ){
+
+                    const auto& following = counts.at(w);
+                    if(following.count(c) > 0){
+                        nwc = following.at(c);
+                    }
                 }
 
 
-                prob_wc = (nwc + alpha) / (nw + alpha * alphabet_size);
+
+                prob_wc = (nwc + alpha) / (nw + alpha * alphabet.size());
 
                 prob[c] = prob_wc; 
             }

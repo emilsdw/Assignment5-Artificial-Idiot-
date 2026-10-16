@@ -3,4 +3,5 @@ program: src/Artificial_idiot.cpp src/reader.cpp src/generator.cpp src/reader.h 
 
 .PHONY: clean
 clean:
-	rm -f program
+	rm -f slm
+	

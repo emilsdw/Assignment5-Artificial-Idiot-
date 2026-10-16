@@ -38,18 +38,44 @@ std::substr = creates a new string that is a copy of a section of the original s
 
 int main(int argc, char* argv[]){
 
+    
     Reader reader;
     Generator generator;
 
+    float alpha;
+    int k_gram_size;
+    string text;
+    int number_of_new_characters;
 
 
+    if (argc != 4 && argc != 6) {
+        cerr << "Usage: " << argv[0]
+            << " <-a> <alpha> <k> <training_file> <length>" << endl;
+        return 1;
+    }
 
-    float alpha = 0.1;
-    int number_of_new_characters = stoi(argv[3]);
-    string text = reader.read(argv[2]);
+
+    if (argc == 6) {
+        if (string(argv[1]) != "-a") {
+            cerr << "Expected -a before the alpha value" << endl;
+            return 1;
+        }
+
+        alpha = stof(argv[2]);
+        k_gram_size = stoi(argv[3]);
+        text = reader.read(argv[4]);
+        number_of_new_characters = stoi(argv[5]);
+    }
+    else {
+        alpha = 0.0;
+        k_gram_size = stoi(argv[1]);
+        text = reader.read(argv[2]);
+        number_of_new_characters = stoi(argv[3]);
+    }
+
 
     set<char> alphabet = reader.alphabet(text);
-    int k_gram_size = stoi(argv[1]);
+    
     
 
 

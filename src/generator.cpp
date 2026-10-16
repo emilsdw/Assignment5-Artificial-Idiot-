@@ -89,14 +89,17 @@ Generator::generate_new_word(const string& text, int k, float alpha, int length,
     auto counts = next_char_counter(text, k);
 
 
-   
-    string w = text.substr(0, k);
-    string result = w;
-
-    //random number generator
     mt19937 engine(random_device{}());
 
-    for (int i = 0; i < length; ++i) {
+    // Pick a random position among all complete k-grams.
+    uniform_int_distribution<size_t> choose_start(0, text.size() - k);
+
+    string w = text.substr(choose_start(engine), k);
+    string result = w.substr(0, length);
+
+
+    for (int i = k; i < length; i++) {
+
         auto probabilities = prob(counts, w, alpha, alphabet);
 
         vector<char> characters;
@@ -109,7 +112,7 @@ Generator::generate_new_word(const string& text, int k, float alpha, int length,
 
         //picks one weight randomly based on their probability
         discrete_distribution<int> choose(
-            weights.begin(), weights.end()
+            weights.begin(), weights.end() 
         );
 
         char c = characters[choose(engine)];

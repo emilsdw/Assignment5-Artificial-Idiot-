@@ -47,6 +47,13 @@ map<char, float> Generator::prob(
                     nw += element.second;
                 }
             }
+
+            if (nw == 0 && alpha == 0) {
+                map<char, float> empty_map;
+                return empty_map;
+            }
+
+
             map<char, float> prob;
             float prob_wc;
 
@@ -101,6 +108,10 @@ Generator::generate_new_word(const string& text, int k, float alpha, int length,
     for (int i = k; i < length; i++) {
 
         auto probabilities = prob(counts, w, alpha, alphabet);
+
+        if (probabilities.empty()) {
+            break;
+        }
 
         vector<char> characters;
         vector<double> weights;

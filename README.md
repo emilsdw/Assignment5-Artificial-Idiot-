@@ -65,9 +65,7 @@ To save the output:
 ## Remaining work
 
 
-- Support the optional `-a` argument and allow `alpha = 0`, using zero as the default.
-- Sample the starting k-gram according to its frequency in the training text.
-- Count the starting k-gram within the requested output length.
+
 - Stop generation when no transition is available and `alpha = 0`.
 - Complete argument validation and exception handling, reporting errors through `std::cerr` and returning a non-zero exit status.
 - Compile source files separately so that `make` recompiles only what is necessary.

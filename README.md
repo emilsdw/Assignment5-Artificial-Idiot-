@@ -5,13 +5,13 @@ A small language model written in C++ for DA4007 Programming Techniques II. The 
 ## How it works
 A **k-gram** is a sequence of `k` characters. The program counts which characters follow each k-gram in the training text.
 
-The probability of generating character `c` after k-gram `w` is calculated using pseudocount smoothing:
+The probability of generating character `c` after k-gram `w` is calculated using pseudo-count smoothing:
 
 ```text
 P(c | w) = (n(w,c) + alpha) / (n(w) + alpha * A)
 ```
 
-Here, `n(w,c)` counts how often `c` follows `w`, `n(w)` counts all observed characters following `w`, and `A` is the number of distinct characters in the training text. The pseudocount `alpha` is currently fixed at `0.1`. Generated text varies between runs because characters are sampled randomly.
+Here, `n(w,c)` counts how often `c` follows `w`, `n(w)` counts all observed characters following `w`, and `A` is the number of distinct characters in the training text. The pseudo-count `alpha` is currently fixed at `0.1`. Generated text varies between runs because characters are sampled randomly.
 
 
 The generator takes a character from this distribution, appends it to the output, and updates the current k-gram by removing its first character and adding the character to the end.
@@ -65,4 +65,4 @@ To save the output:
 ## Remaining work
 
 - Complete argument validation and exception handling, reporting errors through `std::cerr` and returning a non-zero exit status.
-- Compile source files separately so that `make` recompiles only what is necessary.
+- Compile source files separately so that `make` recompile only what is necessary.

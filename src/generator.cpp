@@ -84,7 +84,7 @@ string
 Generator::generate_new_word(const string& text, int k, float alpha, int length, set<char> alphabet) {
     
     //Error handling:
-    if (!(alpha > 0)) {
+    if (!(alpha >= 0)) {
         throw invalid_argument("Alpha must be positive");
     }
 

@@ -64,8 +64,5 @@ To save the output:
 
 ## Remaining work
 
-
-
-- Stop generation when no transition is available and `alpha = 0`.
 - Complete argument validation and exception handling, reporting errors through `std::cerr` and returning a non-zero exit status.
 - Compile source files separately so that `make` recompiles only what is necessary.

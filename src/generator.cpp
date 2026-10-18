@@ -1,6 +1,6 @@
 #include "generator.h"
 #include "reader.h"
-
+#include <cmath>
 #include <random>
 #include <vector>
 #include <stdexcept>
@@ -15,8 +15,10 @@ Generator::next_char_counter(const string& text, int k){
     if (k <= 0) {
         throw invalid_argument ("K must be positve");
     }
-    if (text.size() <= static_cast<size_t>(k)){                     //size_t is a unsigned integer type, here its used because the size of a string cant be negative. 
-        throw invalid_argument ("Training text is to short");
+    if (text.size() < static_cast<size_t>(k)) {
+        throw invalid_argument(
+            "Training text must contain at least k + 1 characters"
+        );
     }
 
 
@@ -82,18 +84,16 @@ map<char, float> Generator::prob(
 
 string 
 Generator::generate_new_word(const string& text, int k, float alpha, int length, set<char> alphabet) {
-    
-    //Error handling:
-    if (!(alpha >= 0)) {
-        throw invalid_argument("Alpha must be positive");
+    if (!std::isfinite(alpha) || alpha < 0) {
+        throw invalid_argument("Alpha must be finite and non-negative");
     }
 
-    if (length < 0) {
-        throw invalid_argument("Length cannot be negative");
+    if (length <= 0 || length < k) {
+        throw invalid_argument("Output length must be positive and at least k");
     }
 
- 
     auto counts = next_char_counter(text, k);
+    
 
 
     mt19937 engine(random_device{}());

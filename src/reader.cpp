@@ -5,7 +5,9 @@
 string Reader::read(const string& filename) {
     ifstream file(filename, ios::binary);
 
-
+    if (!file) {
+        throw runtime_error("Cannot open file '" + filename + "'");
+    }
 
     string text;
     char character;
@@ -22,8 +24,8 @@ string Reader::read(const string& filename) {
 }
 
 
-set<char> 
-Reader::alphabet(const string& text){
+
+set<char> Reader::alphabet(const string& text){
     set<char> alphabet;
     for (char c : text){
         alphabet.insert(c);

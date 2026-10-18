@@ -1,29 +1,24 @@
 #include "reader.h"
-
-string 
-Reader::read(const string& filename){
-    ifstream file(filename);
-    
+#include <stdexcept>
 
 
-    //need to change this error function
-    if (!file.is_open()){
-        cerr << "Can't open the file!" << endl;
-    };
-    
-    string line;
-    string result;
+string Reader::read(const string& filename) {
+    ifstream file(filename, ios::binary);
 
 
-    while(getline(file,line)){
-        if (!line.empty() && line.back() == '\r') {
-            line.pop_back();
-        }
-        result += line;
-        result += '\n';            
+
+    string text;
+    char character;
+
+    while (file.get(character)) {
+        text += character;
     }
 
-    return result;
+    if (file.bad()) {
+        throw runtime_error("Failed to read file '" + filename + "'");
+    }
+
+    return text;
 }
 
 

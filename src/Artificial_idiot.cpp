@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
             number_of_new_characters, 
             alphabet);
 
-        cout << "Generated: "<< generated << endl;
+        cout << generated << endl;
         return 0;
     }
     catch (const std::exception& error) {

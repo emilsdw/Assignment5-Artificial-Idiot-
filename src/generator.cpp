@@ -15,7 +15,7 @@ Generator::next_char_counter(const string& text, int k){
     if (k <= 0) {
         throw invalid_argument ("K must be positve");
     }
-    if (text.size() < static_cast<size_t>(k)) {
+    if (text.size() <= static_cast<size_t>(k)) {
         throw invalid_argument(
             "Training text must contain at least k + 1 characters"
         );

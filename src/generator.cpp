@@ -25,10 +25,11 @@ Generator::next_char_counter(const string& text, int k){
     map<string, map<char, int>> counts;
 
     for(size_t i = 0; i < text.size() - k; i++){
-        string word = text.substr(i,k);                            //creates a new string, substr(pos, length).
+        //creates a new string, substr(pos, length).
+        string word = text.substr(i,k);                            
         char next = text[i + k]; 
 
-        counts[word][next] ++;                                    //first key is word, second key is the char, then ++ increases that value by 1. So it counts how many times a specific word is followed by a specific char !!!
+        counts[word][next] ++;                                   
     }
     return counts;
 }
@@ -39,10 +40,7 @@ map<char, float> Generator::prob(
         float alpha,
         const set<char>& alphabet){
 
-
             
-
-
             int nw = 0;
             if(counts.count(w) > 0){
                 for(const auto& element : counts.at(w)){

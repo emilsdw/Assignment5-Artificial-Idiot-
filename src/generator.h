@@ -16,9 +16,10 @@ class Generator{
 
 
     private: 
-        map<string, map<char, int>> next_char_counter(const string& text, int k);            //function to count how often c follow w
-
-        map<char, float> prob(                                                              //function that calculates the probability P(w,c) for each c in the input alphabet. 
+        //Count how often c follow w
+        map<string, map<char, int>> next_char_counter(const string& text, int k);
+        //Calculates the probability P(w,c) for each c in the input alphabet.           
+        map<char, float> prob(                                                               
             const map<string, map<char, int>> & counts,
             const string& w,  
             float alpha,
